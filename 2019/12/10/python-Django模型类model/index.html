@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="连接数据库在settings.py中默认使用的是sqlite3数据库123456DATABASES = &amp;#123;    &apos;default&apos;: &amp;#123;        &apos;ENGINE&apos;: &apos;django.db.backends.sqlite3&apos;,        &apos;NAME&apos;: os.path.join(BASE_DIR, &apos;db.sqlite3&apos;),    &amp;#125;&amp;#125; 改为my">
+<meta name="keywords" content="Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python Django模型类model">
+<meta property="og:url" content="http://yoursite.com/2019/12/10/python-Django模型类model/index.html">
+<meta property="og:site_name" content="sugarhans">
+<meta property="og:description" content="连接数据库在settings.py中默认使用的是sqlite3数据库123456DATABASES = &amp;#123;    &apos;default&apos;: &amp;#123;        &apos;ENGINE&apos;: &apos;django.db.backends.sqlite3&apos;,        &apos;NAME&apos;: os.path.join(BASE_DIR, &apos;db.sqlite3&apos;),    &amp;#125;&amp;#125; 改为my">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/WX20191210-175726@2x.png">
+<meta property="og:image" content="http://yoursite.com/images/WX20191210-181326@2x.png">
+<meta property="og:image" content="http://yoursite.com/images/WX20191210-181708@2x.png">
+<meta property="og:updated_time" content="2019-12-19T04:16:16.678Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python Django模型类model">
+<meta name="twitter:description" content="连接数据库在settings.py中默认使用的是sqlite3数据库123456DATABASES = &amp;#123;    &apos;default&apos;: &amp;#123;        &apos;ENGINE&apos;: &apos;django.db.backends.sqlite3&apos;,        &apos;NAME&apos;: os.path.join(BASE_DIR, &apos;db.sqlite3&apos;),    &amp;#125;&amp;#125; 改为my">
+<meta name="twitter:image" content="http://yoursite.com/images/WX20191210-175726@2x.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/10/python-Django模型类model/"/>
+
+
+
+
+
+  <title>python Django模型类model | sugarhans</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sugarhans</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/python-Django模型类model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sugarhans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sugarhans">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python Django模型类model</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-10T17:37:28+08:00">
+                2019-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>在settings.py中默认使用的是sqlite3数据库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.sqlite3'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: os.path.join(BASE_DIR, <span class="string">'db.sqlite3'</span>),</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>改为mysql：</p>
+<p>首先使用mysql -uroot -p登录数据库<br>创建数据库：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> books <span class="keyword">charset</span>=utf8;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="comment"># 'ENGINE': 'django.db.backends.sqlite3',</span></span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="comment"># 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),</span></span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'books'</span>,<span class="comment">#使用数据库的名字，数据库必须手动创建</span></span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'root'</span>,</span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">'wt123456'</span>,</span><br><span class="line">        <span class="string">'HOST'</span>: <span class="string">'localhost'</span>,<span class="comment">#指定mysql数据库的所在电脑ip</span></span><br><span class="line">        <span class="string">'PORT'</span>: <span class="number">3306</span>,<span class="comment">#mysql服务的端口号</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure></p>
+<p>出现下面异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module.</span><br><span class="line">Did you install mysqlclient?</span><br></pre></td></tr></table></figure>
+<p>需要运行下面的命令，安装一下pymysql模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install pymysql</span><br></pre></td></tr></table></figure>
+<p>然后需要在<strong>init</strong>文件里面添加导入该模块<br><img src="/images/WX20191210-175726@2x.png" alt="image"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure></p>
+<p>然后运行又会出现下面异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django.core.exceptions.ImproperlyConfigured: mysqlclient 1.3.13 or newer is required; you have 0.9.3</span><br></pre></td></tr></table></figure></p>
+<p>Django连接MySQL时默认使用MySQLdb驱动，但MySQLdb不支持Python3</p>
+<p>需要注释掉下面两行代码<br><img src="/images/WX20191210-181326@2x.png" alt="image"></p>
+<p>运行还会报错需要修改下面你的方法<br><img src="/images/WX20191210-181708@2x.png" alt="image"></p>
+<p>附：下面是site-packages包的所在路劲，可以直接去修改上面两个文件对应的地方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from distutils.sysconfig import get_python_lib</span><br><span class="line">print(get_python_lib())</span><br></pre></td></tr></table></figure></p>
+<h2 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h2><p>在models.py里面创建models:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from django.db import models</span><br><span class="line"></span><br><span class="line"># Create your models here.</span><br><span class="line">class BookInfo(models.Model):</span><br><span class="line">    title = models.CharField(max_length=20)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=0)</span><br><span class="line"></span><br><span class="line">class HeroInfo(models.Model):</span><br><span class="line">    name = models.CharField(max_length=20)</span><br><span class="line">    gender = models.BooleanField(default= False)</span><br><span class="line">    book = models.ForeignKey(&apos;BookInfo&apos;,on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure></p>
+<p>生成迁移文件python manage.py makemigrations<br>执行迁移文件python manage.py migrate </p>
+<p>然后就可以查看数据库里面的表结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+----------------------------+</span><br><span class="line">| Tables_in_books            |</span><br><span class="line">+----------------------------+</span><br><span class="line">| auth_group                 |</span><br><span class="line">| auth_group_permissions     |</span><br><span class="line">| auth_permission            |</span><br><span class="line">| auth_user                  |</span><br><span class="line">| auth_user_groups           |</span><br><span class="line">| auth_user_user_permissions |</span><br><span class="line">| books_bookinfo             |</span><br><span class="line">| books_heroinfo             |</span><br><span class="line">| django_admin_log           |</span><br><span class="line">| django_content_type        |</span><br><span class="line">| django_migrations          |</span><br><span class="line">| django_session             |</span><br><span class="line">+----------------------------+</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc books_bookinfo;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+-------------+-------------+------+-----+---------+----------------+</span><br><span class="line">| Field       | Type        | Null | Key | Default | Extra          |</span><br><span class="line">+-------------+-------------+------+-----+---------+----------------+</span><br><span class="line">| id          | int(11)     | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">| title       | varchar(20) | NO   |     | NULL    |                |</span><br><span class="line">| public_date | date        | NO   |     | NULL    |                |</span><br><span class="line">| comment     | int(11)     | NO   |     | NULL    |                |</span><br><span class="line">+-------------+-------------+------+-----+---------+----------------+</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc books_heroinfo;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+---------+-------------+------+-----+---------+----------------+</span><br><span class="line">| Field   | Type        | Null | Key | Default | Extra          |</span><br><span class="line">+---------+-------------+------+-----+---------+----------------+</span><br><span class="line">| id      | int(11)     | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">| name    | varchar(20) | NO   |     | NULL    |                |</span><br><span class="line">| gender  | tinyint(1)  | NO   |     | NULL    |                |</span><br><span class="line">| book_id | int(11)     | NO   | MUL | NULL    |                |</span><br><span class="line">+---------+-------------+------+-----+---------+----------------+</span><br></pre></td></tr></table></figure>
+<p>说明表已经创建成功</p>
+<p>现在可以往里面添加数据:可以使用python manage.py shell也可以直接使用sql语句如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">insert into books_bookinfo(title,public_date,comment)values</span><br><span class="line">(&apos;射雕英雄传&apos;,&apos;1980-5-1&apos;,34),</span><br><span class="line">(&apos;天龙八部&apos;,&apos;1986-7-1&apos;,40),</span><br><span class="line">(&apos;笑傲江湖&apos;,&apos;1981-12-1&apos;,80),</span><br><span class="line">(&apos;雪山飞狐&apos;,&apos;1983-11-11&apos;,90);</span><br><span class="line">insert into books_heroinfo(name,gender,book_id)values</span><br><span class="line">(&apos;郭靖&apos;,1,1),</span><br><span class="line">(&apos;黄蓉&apos;,0,1),</span><br><span class="line">(&apos;黄药师&apos;,1,1),</span><br><span class="line">(&apos;欧阳锋&apos;,1,1),</span><br><span class="line">(&apos;梅超风&apos;,0,1),</span><br><span class="line">(&apos;乔峰&apos;,1,2),</span><br><span class="line">(&apos;段誉&apos;,1,2),</span><br><span class="line">(&apos;虚竹&apos;,1,2),</span><br><span class="line">(&apos;王语嫣&apos;,0,2),</span><br><span class="line">(&apos;令狐冲&apos;,1,3),</span><br><span class="line">(&apos;岳不群&apos;,1,3),</span><br><span class="line">(&apos;东方不败&apos;,0,3),</span><br><span class="line">(&apos;胡斐&apos;,1,4),</span><br><span class="line">(&apos;苗若兰&apos;,0,4);</span><br></pre></td></tr></table></figure></p>
+<h2 id="设置mysql日志"><a href="#设置mysql日志" class="headerlink" title="设置mysql日志"></a>设置mysql日志</h2><p>进入mysql环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure></p>
+<p>打开日志功能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global general_log=on;</span><br></pre></td></tr></table></figure></p>
+<p>查找日志文件地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;general_log_file&apos;;</span><br><span class="line"></span><br><span class="line">+------------------+---------------------------------------------+</span><br><span class="line">| Variable_name    | Value                                       |</span><br><span class="line">+------------------+---------------------------------------------+</span><br><span class="line">| general_log_file | /usr/local/mysql/data/hansdeMacBook-Pro.log |</span><br><span class="line">+------------------+---------------------------------------------+</span><br></pre></td></tr></table></figure></p>
+<p>实时监控日志信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tail -f /usr/local/mysql/data/hansdeMacBook-Pro.log</span><br></pre></td></tr></table></figure></p>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span>  books.models <span class="keyword">import</span> BookInfo</span><br><span class="line">b = BookInfo.objects.get(id=<span class="number">1</span>)</span><br><span class="line">b = BookInfo.objects.get(id=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p>如果查询的对象不存在，异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">books.models.BookInfo.DoesNotExist: BookInfo matching query does not exist</span><br></pre></td></tr></table></figure></p>
+<h3 id="all"><a href="#all" class="headerlink" title="all"></a>all</h3><p>查询所有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b = BookInfo.objects.all()</span><br><span class="line">type(b)</span><br><span class="line"></span><br><span class="line">django.db.models.query.QuerySet</span><br></pre></td></tr></table></figure></p>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><pre><code>查询多个用filter，单个用get
+</code></pre><ul>
+<li><p>判等</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.get(id__exact = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模糊 查询</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(title__contains=<span class="string">'传'</span>)</span><br><span class="line">BookInfo.objects.filter(title__endswith=<span class="string">'传'</span>)</span><br><span class="line">BookInfo.objects.filter(title__startswith=<span class="string">'传'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>空查询</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(title__isnull=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>范围查询</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(id__in = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>比较查询<br>  大于gt 小于lt 大于等于gte 小于等于lte</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(id__gt = <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日期查询</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(public_date__year = <span class="number">1980</span>)</span><br></pre></td></tr></table></figure>
+<p>  查询某个日期之后</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> date </span><br><span class="line">BookInfo.objects.filter(public_date__gt= date(<span class="number">1980</span>,<span class="number">1</span>,<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="exclude"><a href="#exclude" class="headerlink" title="exclude"></a>exclude</h3><p>查询不等于3的图书<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.exclude(id = <span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="order-by"><a href="#order-by" class="headerlink" title="order_by"></a>order_by</h3><p>查看所有信息，按照id从小到大进行排序<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.all().order_by(<span class="string">'id'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>查看所有信息，按照id从大到小进行排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.all().order_by(<span class="string">'-id'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="Q对象"><a href="#Q对象" class="headerlink" title="Q对象"></a>Q对象</h2><p>用于查询时条件之前存在与或非的逻辑关系<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> Q</span><br><span class="line">BookInfo.objects.filter(Q(id__gt = <span class="number">3</span>) &amp; Q(title__contains = <span class="string">'传'</span>))</span><br><span class="line">BookInfo.objects.filter(Q(id__gt = <span class="number">3</span>) | Q(title__contains = <span class="string">'传'</span>))</span><br><span class="line">BookInfo.objects.filter(~Q(id=<span class="number">3</span>))</span><br></pre></td></tr></table></figure></p>
+<h2 id="F对象"><a href="#F对象" class="headerlink" title="F对象"></a>F对象</h2><p>用于类属性之前的比较<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> F</span><br><span class="line">BookInfo.objects.filter(id__gt=F(<span class="string">'comment'</span>))</span><br><span class="line">BookInfo.objects.filter(id__gt=F(<span class="string">'comment'</span>)*<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p>对查询结果进行聚合操作<br>sum count avg max min </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> Sum,Count,Avg,Max,Min</span><br><span class="line">BookInfo.objects.all().aggregate(Count(<span class="string">'id'</span>))</span><br><span class="line">BookInfo.objects.aggregate(Count(<span class="string">'id'</span>))</span><br></pre></td></tr></table></figure>
+<p>返回值：{‘id__count’: 4}</p>
+<p>内置count函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.all().count()</span><br><span class="line">BookInfo.objects.count()</span><br></pre></td></tr></table></figure>
+<p>返回值：4</p>
+<h3 id="查询集"><a href="#查询集" class="headerlink" title="查询集"></a>查询集</h3><p>all filter exclude orderby 调用这些函数会产生一个查询集<br>特性：</p>
+<ul>
+<li>惰性查询<br>  只有在实际使用数据的是时候才会发生对数据库的真正查询</li>
+<li>缓存<br>  当使用同一个查询集之后再使用这个查询集时，使用的是缓存中的结果</li>
+</ul>
+<p>限制查询集：<br>可以对一个查询集进行取下标和切片操作来限制查询集的记过。对一个查询集进行切片操作会产生一个新的查询集,下标不能为负数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b = BookInfo.objects.all()</span><br><span class="line">b[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">b[<span class="number">0</span>]</span><br></pre></td></tr></table></figure></p>
+<p>exits() 方法：查询集是否存在<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b.exists()</span><br></pre></td></tr></table></figure></p>
+<h2 id="模型类之间的关系"><a href="#模型类之间的关系" class="headerlink" title="模型类之间的关系"></a>模型类之间的关系</h2><p>一对多的关系<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.ForeignKey()</span><br></pre></td></tr></table></figure></p>
+<p>多对多关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.ManyToManyField()</span><br></pre></td></tr></table></figure>
+<p>一对一<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.OneToOneField()</span><br></pre></td></tr></table></figure></p>
+<p>多对多和一对一随便定义在那个类里面都行</p>
+<h2 id="关联查询-一对多"><a href="#关联查询-一对多" class="headerlink" title="关联查询(一对多)"></a>关联查询(一对多)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeroInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    gender = models.BooleanField(default= <span class="keyword">False</span>)</span><br><span class="line">    book = models.OneToOneField(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure>
+<p>查询 id为1的图书关联的所有英雄信息<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b = BookInfo.objects.get(id = <span class="number">1</span>)</span><br><span class="line">b.heroinfo_set.all()</span><br></pre></td></tr></table></figure></p>
+<p>查询 id为1的英雄关联的图书信息<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h = HeroInfo.objects.get(id =<span class="number">1</span>)</span><br><span class="line">h.book</span><br></pre></td></tr></table></figure></p>
+<p>通过模型类实现关联查询</p>
+<ul>
+<li><p>查询图书，图书关联的英雄名字包含‘风’</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(heroinfo__name__contains=<span class="string">'风'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询图书，英雄id大于3</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(heroinfo__id__gt=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询‘天龙八部’的所有英雄信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HeroInfo.objects.filter(book__title=<span class="string">'天龙八部'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<font color="#ff0000">注意：类里面有关联属性，直接写关联数据类似上面的book</font>
+
+<h2 id="插入、更新和删除"><a href="#插入、更新和删除" class="headerlink" title="插入、更新和删除"></a>插入、更新和删除</h2><p>插入和更新<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">h = HeroInfo()</span><br><span class="line">h.name =<span class="string">"段誉"</span></span><br><span class="line">h.gender = <span class="keyword">False</span></span><br><span class="line">h.book = b</span><br><span class="line">h.save()</span><br></pre></td></tr></table></figure></p>
+<p>也可以使用create方法进行插入操作</p>
+<p>删除：调用delete方法</p>
+<h2 id="自关联"><a href="#自关联" class="headerlink" title="自关联"></a>自关联</h2><p>比如省市县<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.ForeignKey(self)</span><br></pre></td></tr></table></figure></p>
+<p>需要遵循上面一对多的查询原则</p>
+<h2 id="管理类"><a href="#管理类" class="headerlink" title="管理类"></a>管理类</h2><p>Manager对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type(BookInfo.objects)</span><br><span class="line">django.db.models.manager.Manager</span><br></pre></td></tr></table></figure></p>
+<p>定义一个book属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    book = models.Manager()</span><br></pre></td></tr></table></figure>
+<p>使用book属性查询数据库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.book.all()</span><br></pre></td></tr></table></figure></p>
+<p>其他：</p>
+<ul>
+<li>改变查询结果集<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfoManager</span><span class="params">(models.Manager)</span>:</span></span><br><span class="line">    <span class="string">'''模型管理器类'''</span></span><br><span class="line">    <span class="comment">#改变查询结果集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">all</span><span class="params">(self)</span>:</span></span><br><span class="line">        books = super().all()</span><br><span class="line">        books = books.filter(id = <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> books</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    books = BookInfoManager()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.books.all()</span><br><span class="line"></span><br><span class="line">&lt;QuerySet [&lt;BookInfo: BookInfo object (<span class="number">1</span>)&gt;]&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>封装函数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfoManager</span><span class="params">(models.Manager)</span>:</span></span><br><span class="line">    <span class="string">'''模型管理器类'''</span></span><br><span class="line">    <span class="comment">#改变查询结果集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">all</span><span class="params">(self)</span>:</span></span><br><span class="line">        books = super().all()</span><br><span class="line">        books = books.filter(id = <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> books</span><br><span class="line"></span><br><span class="line">    <span class="comment">#封装函数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_book</span><span class="params">(self, title, public_date)</span>:</span></span><br><span class="line">        <span class="comment"># obj = BookInfo()</span></span><br><span class="line">        <span class="comment">#获取self所在的模型类</span></span><br><span class="line">        obj = self.model</span><br><span class="line">        obj.title = title</span><br><span class="line">        obj.public_date = public_date</span><br><span class="line">        obj.save()</span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    books = BookInfoManager()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @classmethod</span></span><br><span class="line">    <span class="comment"># def create_book(cls, title, public_date):</span></span><br><span class="line">    <span class="comment">#     obj = cls()</span></span><br><span class="line">    <span class="comment">#     obj.title = title</span></span><br><span class="line">    <span class="comment">#     obj.public_date = public_date</span></span><br><span class="line">    <span class="comment">#     obj.save()</span></span><br><span class="line">    <span class="comment">#     return obj</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeroInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    gender = models.BooleanField(default= <span class="keyword">False</span>)</span><br><span class="line">    book = models.OneToOneField(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>使用下面语句插入数据库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book = BookInfo.books.create_book(<span class="string">'test'</span>,<span class="string">'1900-1-1'</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="元选项"><a href="#元选项" class="headerlink" title="元选项"></a>元选项</h2><p>Django默认生成的表名：<br>应用名小写_模型类名小写<br>元选项：<br>需要在模型类中定义一个元素Meta，在里面定义一个累属性db_table就可以执行表名<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    books = BookInfoManager()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @classmethod</span></span><br><span class="line">    <span class="comment"># def create_book(cls, title, public_date):</span></span><br><span class="line">    <span class="comment">#     obj = cls()</span></span><br><span class="line">    <span class="comment">#     obj.title = title</span></span><br><span class="line">    <span class="comment">#     obj.public_date = public_date</span></span><br><span class="line">    <span class="comment">#     obj.save()</span></span><br><span class="line">    <span class="comment">#     return obj</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">'book'</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/10/python-Django基本配置/" rel="next" title="python Django基本配置">
+                <i class="fa fa-chevron-left"></i> python Django基本配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/10/python-Django视图类views/" rel="prev" title="python Django视图类views">
+                python Django视图类views <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sugarhans</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接数据库"><span class="nav-number">1.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建表"><span class="nav-number">2.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置mysql日志"><span class="nav-number">3.</span> <span class="nav-text">设置mysql日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询"><span class="nav-number">4.</span> <span class="nav-text">查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#get"><span class="nav-number">4.1.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all"><span class="nav-number">4.2.</span> <span class="nav-text">all</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter"><span class="nav-number">4.3.</span> <span class="nav-text">filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exclude"><span class="nav-number">4.4.</span> <span class="nav-text">exclude</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#order-by"><span class="nav-number">4.5.</span> <span class="nav-text">order_by</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q对象"><span class="nav-number">5.</span> <span class="nav-text">Q对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F对象"><span class="nav-number">6.</span> <span class="nav-text">F对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合"><span class="nav-number">7.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询集"><span class="nav-number">7.1.</span> <span class="nav-text">查询集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型类之间的关系"><span class="nav-number">8.</span> <span class="nav-text">模型类之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关联查询-一对多"><span class="nav-number">9.</span> <span class="nav-text">关联查询(一对多)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入、更新和删除"><span class="nav-number">10.</span> <span class="nav-text">插入、更新和删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自关联"><span class="nav-number">11.</span> <span class="nav-text">自关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理类"><span class="nav-number">12.</span> <span class="nav-text">管理类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元选项"><span class="nav-number">13.</span> <span class="nav-text">元选项</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sugarhans</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
