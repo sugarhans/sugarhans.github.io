@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="sugarhans">
 <meta property="og:description" content="设置富文本https://www.cnblogs.com/qynprime/p/8026672.html adb shell1adb shell pm list package 列出所有包名 Dagger2java：https://www.jianshu.com/p/39d1df6c877d/android：https://www.jianshu.com/p/2cd491f0da01@Binds：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-15T03:03:41.258Z">
+<meta property="og:updated_time" content="2020-06-01T10:42:19.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android基础">
 <meta name="twitter:description" content="设置富文本https://www.cnblogs.com/qynprime/p/8026672.html adb shell1adb shell pm list package 列出所有包名 Dagger2java：https://www.jianshu.com/p/39d1df6c877d/android：https://www.jianshu.com/p/2cd491f0da01@Binds：">
@@ -391,6 +391,26 @@
 <h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><p><a href="https://www.jianshu.com/p/186fa07fc48a" target="_blank" rel="noopener">https://www.jianshu.com/p/186fa07fc48a</a></p>
 <h2 id="android手机各种路径的区别"><a href="#android手机各种路径的区别" class="headerlink" title="android手机各种路径的区别"></a>android手机各种路径的区别</h2><p><a href="https://blog.csdn.net/Kelaker/article/details/80471352" target="_blank" rel="noopener">https://blog.csdn.net/Kelaker/article/details/80471352</a></p>
 <h2 id="webView"><a href="#webView" class="headerlink" title="webView"></a>webView</h2><h3 id="webView加载自定义错误页面"><a href="#webView加载自定义错误页面" class="headerlink" title="webView加载自定义错误页面"></a>webView加载自定义错误页面</h3><p><a href="https://my.oschina.net/u/1777508/blog/308323" target="_blank" rel="noopener">https://my.oschina.net/u/1777508/blog/308323</a></p>
+<h3 id="alert显示不出来"><a href="#alert显示不出来" class="headerlink" title="alert显示不出来"></a>alert显示不出来</h3><ul>
+<li><p>没有自定义实现WebChromeClient（一般只需要实现一个空的WebChromeClient即可）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mWebView.setWebChromeClient(<span class="keyword">new</span> WebChromeClient());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>new WebView的时候用的不是this，而是getApplicationContext()，最后alert也无法弹出。这种情况虽然比较少碰到，但还是要谨记！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">官方解释：https:<span class="comment">//developer.android.google.cn/reference/android/webkit/WebView?hl=en#WebView(android.content.Context)</span></span><br><span class="line">Note: WebView should always be instantiated with an Activity Context. If instantiated with an Application Context, WebView will be unable to provide several features, such as JavaScript dialogs and autofill.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="查看包名"><a href="#查看包名" class="headerlink" title="查看包名"></a>查看包名</h2><p>在Android sdk中的\android-sdk-windows\build-tools\26.0.2文件下有个aapt工具，进入目录，输入命令 aapt d badging apk路径，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aapt d badging /Users/hans/Downloads/release/simple-release.apk</span><br></pre></td></tr></table></figure></p>
+<p>即可解析得到Apk信息（包名，版本名，版本号，安装位置，sdksdkVersion，targitSdkVersion，所需权限等）</p>
+<h3 id="查看md5-sha1-SHA256"><a href="#查看md5-sha1-SHA256" class="headerlink" title="查看md5 sha1 SHA256"></a>查看md5 sha1 SHA256</h3><ol>
+<li>找到生成的apk文件，将其后缀改为rar</li>
+<li>解压缩rar文件</li>
+<li>cmd命令行进入解压缩文件夹下的META-INF目录下，该目录中的CERT.RSA 就存有证书信息</li>
+<li>命令行执行keytool -printcert -file CERT.RSA </li>
+</ol>
+<p>开发时默认路径：~/.android/debug.keystore<br>获取值的方式:keytool -list -v -keystore debug.keystore</p>
+<h3 id="打不同渠道的包"><a href="#打不同渠道的包" class="headerlink" title="打不同渠道的包"></a>打不同渠道的包</h3><p><a href="https://blog.csdn.net/cherish1260/article/details/78498304" target="_blank" rel="noopener">https://blog.csdn.net/cherish1260/article/details/78498304</a><br><a href="https://www.jianshu.com/p/782a42e7b2b1" target="_blank" rel="noopener">https://www.jianshu.com/p/782a42e7b2b1</a></p>
+<h2 id="卡顿"><a href="#卡顿" class="headerlink" title="卡顿"></a>卡顿</h2><h3 id="activity界面跳转界面卡顿（存在跳转动画）"><a href="#activity界面跳转界面卡顿（存在跳转动画）" class="headerlink" title="activity界面跳转界面卡顿（存在跳转动画）"></a>activity界面跳转界面卡顿（存在跳转动画）</h3><p>重写onEnterAnimationComplete方法<br><strong style="color:red">注意：</strong>改接口属于API21</p>
+<h2 id="启动模式问题"><a href="#启动模式问题" class="headerlink" title="启动模式问题"></a>启动模式问题</h2><h3 id="启动模式-singleTask-的问题"><a href="#启动模式-singleTask-的问题" class="headerlink" title="启动模式 singleTask 的问题"></a>启动模式 singleTask 的问题</h3><p><a href="https://stackoverflow.com/questions/2417468/android-bug-in-launchmode-singletask-activity-stack-not-preserved" target="_blank" rel="noopener">https://stackoverflow.com/questions/2417468/android-bug-in-launchmode-singletask-activity-stack-not-preserved</a><br>Expected: A &gt; B &gt; HOME &gt; B<br>Actual: A &gt; B &gt; HOME &gt; A (bad!)<br>按home键会回到singleTask标记的activity<br>解决方法：<br>Just remove the launchMode=”singleTask” and set FLAG_ACTIVITY_CLEAR_TOP|FLAG_ACTIVITY_SINGLE_TOP flag whenever call an intent to A</p>
 
       
     </div>
@@ -510,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -521,7 +541,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -532,7 +552,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -565,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置富文本"><span class="nav-number">1.</span> <span class="nav-text">设置富文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#adb-shell"><span class="nav-number">2.</span> <span class="nav-text">adb shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dagger2"><span class="nav-number">3.</span> <span class="nav-text">Dagger2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxJava和RxAndroid"><span class="nav-number">4.</span> <span class="nav-text">RxJava和RxAndroid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxBinding"><span class="nav-number">5.</span> <span class="nav-text">RxBinding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxLifecycle"><span class="nav-number">6.</span> <span class="nav-text">RxLifecycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gradle-properties"><span class="nav-number">7.</span> <span class="nav-text">gradle.properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#greenDao"><span class="nav-number">8.</span> <span class="nav-text">greenDao</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件化"><span class="nav-number">9.</span> <span class="nav-text">组件化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android手机各种路径的区别"><span class="nav-number">10.</span> <span class="nav-text">android手机各种路径的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webView"><span class="nav-number">11.</span> <span class="nav-text">webView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webView加载自定义错误页面"><span class="nav-number">11.1.</span> <span class="nav-text">webView加载自定义错误页面</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置富文本"><span class="nav-number">1.</span> <span class="nav-text">设置富文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#adb-shell"><span class="nav-number">2.</span> <span class="nav-text">adb shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dagger2"><span class="nav-number">3.</span> <span class="nav-text">Dagger2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxJava和RxAndroid"><span class="nav-number">4.</span> <span class="nav-text">RxJava和RxAndroid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxBinding"><span class="nav-number">5.</span> <span class="nav-text">RxBinding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxLifecycle"><span class="nav-number">6.</span> <span class="nav-text">RxLifecycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gradle-properties"><span class="nav-number">7.</span> <span class="nav-text">gradle.properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#greenDao"><span class="nav-number">8.</span> <span class="nav-text">greenDao</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件化"><span class="nav-number">9.</span> <span class="nav-text">组件化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android手机各种路径的区别"><span class="nav-number">10.</span> <span class="nav-text">android手机各种路径的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webView"><span class="nav-number">11.</span> <span class="nav-text">webView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webView加载自定义错误页面"><span class="nav-number">11.1.</span> <span class="nav-text">webView加载自定义错误页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alert显示不出来"><span class="nav-number">11.2.</span> <span class="nav-text">alert显示不出来</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看包名"><span class="nav-number">12.</span> <span class="nav-text">查看包名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看md5-sha1-SHA256"><span class="nav-number">12.1.</span> <span class="nav-text">查看md5 sha1 SHA256</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打不同渠道的包"><span class="nav-number">12.2.</span> <span class="nav-text">打不同渠道的包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卡顿"><span class="nav-number">13.</span> <span class="nav-text">卡顿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#activity界面跳转界面卡顿（存在跳转动画）"><span class="nav-number">13.1.</span> <span class="nav-text">activity界面跳转界面卡顿（存在跳转动画）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动模式问题"><span class="nav-number">14.</span> <span class="nav-text">启动模式问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动模式-singleTask-的问题"><span class="nav-number">14.1.</span> <span class="nav-text">启动模式 singleTask 的问题</span></a></li></ol></li></ol></div>
             
 
           </div>
