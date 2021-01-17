@@ -6,10 +6,10 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Django," />
+  <meta name="keywords" content="Django,">
 
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/12/10/python-Django模型类model/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/12/10/python-Django模型类model/">
 
 
 
@@ -158,7 +158,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">sugarhans</span>
         <span class="logo-line-after"><i></i></span>
@@ -188,7 +188,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -198,7 +198,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -208,7 +208,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -218,7 +218,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -231,7 +231,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -252,9 +252,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -295,7 +293,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sugarhans">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -331,7 +329,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -432,7 +430,7 @@
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(title__contains=<span class="string">'传'</span>)</span><br><span class="line">BookInfo.objects.filter(title__endswith=<span class="string">'传'</span>)</span><br><span class="line">BookInfo.objects.filter(title__startswith=<span class="string">'传'</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>空查询</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(title__isnull=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(title__isnull=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>范围查询</p>
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.objects.filter(id__in = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>])</span><br></pre></td></tr></table></figure>
@@ -470,7 +468,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.ManyToManyField()</span><br></pre></td></tr></table></figure>
 <p>一对一<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.OneToOneField()</span><br></pre></td></tr></table></figure></p>
 <p>多对多和一对一随便定义在那个类里面都行</p>
-<h2 id="关联查询-一对多"><a href="#关联查询-一对多" class="headerlink" title="关联查询(一对多)"></a>关联查询(一对多)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeroInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    gender = models.BooleanField(default= <span class="keyword">False</span>)</span><br><span class="line">    book = models.OneToOneField(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure>
+<h2 id="关联查询-一对多"><a href="#关联查询-一对多" class="headerlink" title="关联查询(一对多)"></a>关联查询(一对多)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeroInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    gender = models.BooleanField(default= <span class="literal">False</span>)</span><br><span class="line">    book = models.OneToOneField(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure>
 <p>查询 id为1的图书关联的所有英雄信息<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b = BookInfo.objects.get(id = <span class="number">1</span>)</span><br><span class="line">b.heroinfo_set.all()</span><br></pre></td></tr></table></figure></p>
 <p>查询 id为1的英雄关联的图书信息<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h = HeroInfo.objects.get(id =<span class="number">1</span>)</span><br><span class="line">h.book</span><br></pre></td></tr></table></figure></p>
 <p>通过模型类实现关联查询</p>
@@ -487,7 +485,7 @@
 </ul>
 <font color="#ff0000">注意：类里面有关联属性，直接写关联数据类似上面的book</font>
 
-<h2 id="插入、更新和删除"><a href="#插入、更新和删除" class="headerlink" title="插入、更新和删除"></a>插入、更新和删除</h2><p>插入和更新<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">h = HeroInfo()</span><br><span class="line">h.name =<span class="string">"段誉"</span></span><br><span class="line">h.gender = <span class="keyword">False</span></span><br><span class="line">h.book = b</span><br><span class="line">h.save()</span><br></pre></td></tr></table></figure></p>
+<h2 id="插入、更新和删除"><a href="#插入、更新和删除" class="headerlink" title="插入、更新和删除"></a>插入、更新和删除</h2><p>插入和更新<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">h = HeroInfo()</span><br><span class="line">h.name =<span class="string">"段誉"</span></span><br><span class="line">h.gender = <span class="literal">False</span></span><br><span class="line">h.book = b</span><br><span class="line">h.save()</span><br></pre></td></tr></table></figure></p>
 <p>也可以使用create方法进行插入操作</p>
 <p>删除：调用delete方法</p>
 <h2 id="自关联"><a href="#自关联" class="headerlink" title="自关联"></a>自关联</h2><p>比如省市县<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.ForeignKey(self)</span><br></pre></td></tr></table></figure></p>
@@ -503,7 +501,7 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BookInfo.books.all()</span><br><span class="line"></span><br><span class="line">&lt;QuerySet [&lt;BookInfo: BookInfo object (<span class="number">1</span>)&gt;]&gt;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>封装函数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfoManager</span><span class="params">(models.Manager)</span>:</span></span><br><span class="line">    <span class="string">'''模型管理器类'''</span></span><br><span class="line">    <span class="comment">#改变查询结果集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">all</span><span class="params">(self)</span>:</span></span><br><span class="line">        books = super().all()</span><br><span class="line">        books = books.filter(id = <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> books</span><br><span class="line"></span><br><span class="line">    <span class="comment">#封装函数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_book</span><span class="params">(self, title, public_date)</span>:</span></span><br><span class="line">        <span class="comment"># obj = BookInfo()</span></span><br><span class="line">        <span class="comment">#获取self所在的模型类</span></span><br><span class="line">        obj = self.model</span><br><span class="line">        obj.title = title</span><br><span class="line">        obj.public_date = public_date</span><br><span class="line">        obj.save()</span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    books = BookInfoManager()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @classmethod</span></span><br><span class="line">    <span class="comment"># def create_book(cls, title, public_date):</span></span><br><span class="line">    <span class="comment">#     obj = cls()</span></span><br><span class="line">    <span class="comment">#     obj.title = title</span></span><br><span class="line">    <span class="comment">#     obj.public_date = public_date</span></span><br><span class="line">    <span class="comment">#     obj.save()</span></span><br><span class="line">    <span class="comment">#     return obj</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeroInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    gender = models.BooleanField(default= <span class="keyword">False</span>)</span><br><span class="line">    book = models.OneToOneField(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure>
+<li>封装函数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfoManager</span><span class="params">(models.Manager)</span>:</span></span><br><span class="line">    <span class="string">'''模型管理器类'''</span></span><br><span class="line">    <span class="comment">#改变查询结果集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">all</span><span class="params">(self)</span>:</span></span><br><span class="line">        books = super().all()</span><br><span class="line">        books = books.filter(id = <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> books</span><br><span class="line"></span><br><span class="line">    <span class="comment">#封装函数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_book</span><span class="params">(self, title, public_date)</span>:</span></span><br><span class="line">        <span class="comment"># obj = BookInfo()</span></span><br><span class="line">        <span class="comment">#获取self所在的模型类</span></span><br><span class="line">        obj = self.model</span><br><span class="line">        obj.title = title</span><br><span class="line">        obj.public_date = public_date</span><br><span class="line">        obj.save()</span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    public_date = models.DateField()</span><br><span class="line">    comment =models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    books = BookInfoManager()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @classmethod</span></span><br><span class="line">    <span class="comment"># def create_book(cls, title, public_date):</span></span><br><span class="line">    <span class="comment">#     obj = cls()</span></span><br><span class="line">    <span class="comment">#     obj.title = title</span></span><br><span class="line">    <span class="comment">#     obj.public_date = public_date</span></span><br><span class="line">    <span class="comment">#     obj.save()</span></span><br><span class="line">    <span class="comment">#     return obj</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeroInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line">    gender = models.BooleanField(default= <span class="literal">False</span>)</span><br><span class="line">    book = models.OneToOneField(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>使用下面语句插入数据库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book = BookInfo.books.create_book(<span class="string">'test'</span>,<span class="string">'1900-1-1'</span>)</span><br></pre></td></tr></table></figure></p>
@@ -627,7 +625,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -638,7 +636,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -649,7 +647,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -702,7 +700,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
